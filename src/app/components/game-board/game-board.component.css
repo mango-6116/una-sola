@@ -1,0 +1,86 @@
+
+
+.game-board {
+    box-sizing: content-box;
+    display: grid;
+    grid-template-columns: 100vh auto;
+    grid-template-rows: 28vh auto;
+    grid-template-areas: 
+        "a-play-board a-controls"
+        "a-play-board a-reference";
+}
+
+.play-board {
+    grid-area: a-play-board;
+    background-color: white;
+    width: fit-content;
+}
+
+.controls {
+    grid-area: a-controls;
+    padding: 2.5em 0;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.reference {
+    grid-area: a-reference;
+    background-color: #FFF7E2;
+    margin: 0 1.5em 1.5em 0;
+    padding: 2.5em;
+    font-size: 1.1vmax;
+    max-height: 68vh;
+    overflow-y: scroll;
+}
+
+.game-string-row {
+    display: flex;
+    align-items: baseline;
+    padding: .6em;
+    margin: .3em;
+    font-size: 1.5vmax;
+}
+
+.game-string {
+    font-family: consolas, Courier New;
+    padding: .2em;
+    font-size: 1.5vmax;
+    margin: 0 .4em;
+}
+
+.games-set {
+    margin-left: 1em;
+}
+
+.levels {
+    margin: 0 .4em;
+    padding: .2em;
+    font-size: 1.5vmax;
+}
+  
+@media (orientation: portrait) {
+    .game-board {
+        box-sizing: content-box;
+        display: grid;
+        grid-template-columns: 100vw;
+        grid-template-rows: 100vw 8em auto;
+        grid-template-areas: 
+            "a-play-board"
+            "a-controls"
+            "a-reference";
+    }
+
+    .controls {
+        padding: 1.5em;
+        justify-content: center;
+    }
+
+    .reference {
+        margin: 1.5em;
+        max-height: calc(96vh - 100vw - 8em);
+        font-size: .8vmax;
+    }
+
+}

@@ -1,0 +1,15 @@
+  <div class="cell-grid" cdkDropListGroup>
+    <div class="cell-row" *ngFor="let row of gameState; let rowIndex = index">
+      <div class="cell" [ngClass]="{'shaded': ((rowIndex + colIndex)%2 === 1)}" *ngFor="let cell of row; let colIndex = index"  (cdkDropListDropped)="checkDrop($event)" cdkDropList [id]="'ci-' + rowIndex + '-' + colIndex">
+        <div [ngSwitch]="cell"  cdkDragBoundary=".cell-grid" cdkDrag >
+          <div *cdkDragPlaceholder></div>
+          <app-king *ngSwitchCase="'K'"></app-king>
+          <app-queen *ngSwitchCase="'Q'"></app-queen>
+          <app-rook *ngSwitchCase="'R'"></app-rook>
+          <app-bishop *ngSwitchCase="'B'"></app-bishop>
+          <app-knight *ngSwitchCase="'N'"></app-knight>
+          <app-pawn *ngSwitchCase="'P'"></app-pawn>
+        </div>
+      </div>
+    </div>
+  </div>

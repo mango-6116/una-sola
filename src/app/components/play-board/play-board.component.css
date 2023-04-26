@@ -1,0 +1,56 @@
+
+.cell-grid {
+  border: 2vh solid #B0BEC5;
+  box-sizing: content-box;
+  padding: 1vh;
+  margin: 3vh;
+  width: 88vh;
+  height: 88vh;
+}
+
+.cell-row {
+  display: flex;
+  height: 25%
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+}
+
+
+@media (orientation: portrait) {
+  .cell-grid {
+    border-width: 2vw;
+    padding: 1vw;
+    margin: 3vw;
+    width: 90vw;
+    height: 90vw;
+  }
+}
+
+
+.shaded {
+  background-color: #728C98;
+}
+
+::ng-deep svg {
+   transform: scale(1, 1);
+}
+
+::ng-deep .mat-mdc-unelevated-button>.mat-icon, .mat-mdc-raised-button>.mat-icon, .mat-mdc-outlined-button>.mat-icon {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.drop-placeholder {
+  display: none;
+  max-width: 0;
+  max-height: 0;
+}
+
+.cdk-drop-list-dragging .cdk-drag {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}

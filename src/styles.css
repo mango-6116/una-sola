@@ -1,0 +1,17 @@
+/* Add application styles & imports to this file! */
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Work+Sans');
+
+* {
+   box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-size: 1.5vmax;
+}
+
+.party-canvas {
+  height: 80vw;
+  border: solid 1px black;
+}

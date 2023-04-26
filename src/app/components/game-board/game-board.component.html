@@ -1,0 +1,53 @@
+<div class="game-board">
+
+    <div class="play-board">
+        <app-play-board [gameString]="currentGameString">
+        </app-play-board>
+    </div>
+    <div class="controls">
+      <div class="game-string-row">
+          <span>Current Game:</span>
+          <div>
+            <input type="text" mat-input class="game-string" #gamestring [value]="currentGameString">
+            <button mat-flat-button aria-label="Reset" color="accent" (click)="resetGameString(gamestring.value)">
+              <mat-icon>cached</mat-icon>
+            </button>
+          </div>
+        </div>
+        <div  class="game-string-row">
+          <span>Games:</span>
+          <div class="games-set">
+            <button mat-flat-button aria-label="Previous" color="accent" (click)="previousGameString(gamestring.value)">
+              <mat-icon>chevron_left</mat-icon>
+            </button>
+            <select class="levels" (change)="changeGame($event)">
+                <option *ngFor="let level of levels" [value]="level.gameString" [selected]="level.gameString === currentGameString">
+                  {{level.levelName}}
+                </option>
+            </select>
+            <button mat-flat-button aria-label="Next" color="accent" (click)="nextGameString(gamestring.value)">
+              <mat-icon>chevron_right</mat-icon>
+            </button>
+          </div>
+        </div>
+    </div>
+    <div class="reference">
+      <h3>Puzzle Rules</h3>
+      <span> - Single player puzzle game.</span><br/>
+      <span> - The goal of peg solitaire with the moves of chess.</span><br/>
+      <span> - Every move must be a (same color) capture.</span><br/>
+      <span> - There must be only one piece left on the board when finished.</span><br/>
+      <span> - Pieces move as they normally would in a regular chess game.</span><br/>
+      <span> - Special moves (en pessant, pawn promotion etc) are not allowed.</span><br/>
+      <span> - A King can be captured at any time just like any other piece.</span><br/>
+      <h3>Game Controls</h3>
+      <span> - Drag and drop pieces to capture until only one is left.</span><br/>
+      <span> - A new game can be selected at any time using the 'Games' dropdown.</span><br/>
+      <span> - A custom game can be entered directly at the 'Current Game' box.</span><br/>
+      <span> - The custom game notation is 16 characters with optional additional spaces.</span><br/>
+      <span> - Every four characters represent a row on the board, from top down.</span><br/>
+      <span> - The 'Reload' button resets the current game. (selected or custom entry)</span><br/>
+      <span> - The last game layout will be 'remebered' locally by the browser.</span><br/>
+    </div>
+
+</div>

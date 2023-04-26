@@ -1,0 +1,85 @@
+{
+  "configVersion": 1,
+  "timestamp": 1682475797760,
+  "index": "/una-sola/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/una-sola/favicon.ico",
+        "/una-sola/index.html",
+        "/una-sola/main.92654e437e24763b.js",
+        "/una-sola/manifest.webmanifest",
+        "/una-sola/polyfills.e4f06115834619ce.js",
+        "/una-sola/runtime.e21dd4d9e7828588.js",
+        "/una-sola/styles.760a20a942950953.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/una-sola/assets/chess.svg",
+        "/una-sola/assets/icons/icon-128x128.png",
+        "/una-sola/assets/icons/icon-144x144.png",
+        "/una-sola/assets/icons/icon-152x152.png",
+        "/una-sola/assets/icons/icon-192x192.png",
+        "/una-sola/assets/icons/icon-384x384.png",
+        "/una-sola/assets/icons/icon-512x512.png",
+        "/una-sola/assets/icons/icon-72x72.png",
+        "/una-sola/assets/icons/icon-96x96.png",
+        "/una-sola/assets/knight.svg"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/una-sola/assets/chess.svg": "c7a9c5dda8cf21b4b3a1d89b8292f110226b6b8f",
+    "/una-sola/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "/una-sola/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "/una-sola/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "/una-sola/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "/una-sola/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/una-sola/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/una-sola/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "/una-sola/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/una-sola/assets/knight.svg": "60812ee886b2b142ee8d06e7aeb2927fad825dc0",
+    "/una-sola/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "/una-sola/index.html": "bc41a19890ff34db4b04eb1b0fc845c0ae235f3e",
+    "/una-sola/main.92654e437e24763b.js": "4a82996ec2067cc0289d605d3f47e39540c93723",
+    "/una-sola/manifest.webmanifest": "550a9c12fa2922de4ae80a69f543416ef85081c7",
+    "/una-sola/polyfills.e4f06115834619ce.js": "91d3cce138d8118e51892ea0e868569dff266733",
+    "/una-sola/runtime.e21dd4d9e7828588.js": "7a9173b25a5ac2b781dbf662e2dce64c6814051e",
+    "/una-sola/styles.760a20a942950953.css": "30047de275d74588b1f78a6953fd8461f80af7ec"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
