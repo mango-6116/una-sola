@@ -1,7 +1,7 @@
 {
-  "version": "1.9.2",
-  "name": "chess-peg",
-  "short_name": "chess-peg",
+  "version": "1.10.0",
+  "name": "una-sola",
+  "short_name": "una-sola",
   "theme_color": "#728C98",
   "background_color": "#fafafa",
   "display": "fullscreen",
