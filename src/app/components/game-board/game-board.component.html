@@ -1,7 +1,9 @@
 <div class="game-board">
 
     <div class="play-board">
-        <app-play-board [gameString]="currentGameString">
+        <app-play-board 
+          [gameString]="currentGameString"
+          (setGames)="setGames($event)">
         </app-play-board>
     </div>
     <div class="controls">

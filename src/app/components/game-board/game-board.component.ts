@@ -66,6 +66,14 @@ export class GameBoardComponent implements OnInit {
     localStorage.setItem('lastGameString', this.currentGameString);
   }
 
+  setGames(ev: GameLevel[]) {
+    if (ev.length) {
+      this.levels = ev;
+    } else {
+      this.setLevels();
+    }
+  }
+
   setLevels() {
     this.levels = [
       { levelName: '001 - Easy', gameString: '.R.. ..P. .P.. ....' },

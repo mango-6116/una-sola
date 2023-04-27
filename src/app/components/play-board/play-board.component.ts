@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import * as CT from 'js-combinatorics';
 import Sample from '@stdlib/random-sample';
 import  JSConfetti  from 'js-confetti';
+import { GameLevel } from '../game-board/game-board.component';
 
 
 export interface moveStep {
@@ -14,7 +15,6 @@ export interface boardPiece {
   row: number;
   col: number;
 }
-
 
 @Component({
   selector: 'app-play-board',
@@ -33,8 +33,10 @@ export class PlayBoardComponent implements OnInit {
       }else if (val == 'gen') {
         // intialize random gen:
         this.genSample();
-      }else if (val == 'cycle') {
-        this.cycleGen();
+      }else if (val.startsWith('cycle')) {
+        this.cycleGen(val);
+      }else if (val == 'reset') {
+        this.setGames.emit([]);
       } else {
         this._gameString = val;
         this.setGameState(val);
@@ -46,12 +48,15 @@ export class PlayBoardComponent implements OnInit {
     return this._gameString;
   }
 
+  @Output() setGames = new EventEmitter<GameLevel[]>();
+
   boardMaps: boardPiece[][] = [];
   mapId = 0;
   moveTracker: any[] = [];
   solutions: any[] = [];
   pendingChecks = true;
   confettiSize = 32;
+  genLevels: GameLevel[] = [];
 
   constructor() {
   }
@@ -289,17 +294,26 @@ export class PlayBoardComponent implements OnInit {
     })
   }
 
-  genSample(skipLog = false) {
-    this.setGameState('.... .... .... ....')
-    const allPieces = ['R', 'K', 'B', 'B', 'N', 'N', 'P', 'P', 'P', 'P'];
+  genSample(skipLog = false, spec = '') {
+    this.setGameState('.... .... .... ....');
+    var allPieces = ['R', 'K', 'B', 'B', 'N', 'N', 'P', 'P', 'P', 'P'];
+    var pieceCount = 7;
+    var specOut = spec.split(':');
+    if (specOut.length > 1) {
+      pieceCount = Number(specOut[1]);
+    } 
+    if (specOut.length > 2) {
+      allPieces = (specOut[2]).split('');
+    }
+    
     const allSquares = [
       {row: 0, col: 0}, {row: 0, col: 1}, {row: 0, col: 2}, {row: 0, col: 3},
       {row: 1, col: 0}, {row: 1, col: 1}, {row: 1, col: 2}, {row: 1, col: 3}, 
       {row: 2, col: 0}, {row: 2, col: 1}, {row: 2, col: 2}, {row: 2, col: 3}, 
       {row: 3, col: 0}, {row: 3, col: 1}, {row: 3, col: 2}, {row: 3, col: 3}
    ];
-    const landing = Sample(allSquares, {'replace': false, 'size': 7});
-    const shuffle = Sample(allPieces, {'replace': false, 'size': 7});
+    const landing = Sample(allSquares, {'replace': false, 'size': pieceCount});
+    const shuffle = Sample(allPieces, {'replace': false, 'size': pieceCount});
 
     var newGameMap = shuffle.map((chip, at) => ({piece: chip, row: landing[at].row, col: landing[at].col })); 
     this.boardMaps = [newGameMap];
@@ -317,15 +331,19 @@ export class PlayBoardComponent implements OnInit {
     return result;
   }
 
-  cycleGen() {
+  cycleGen(spec: string) {
+    this.genLevels = [];
     var counter = 0;
     do {
-      this.genSample(true);
+      this.genSample(true, spec);
       this.startSolver(true);
       if (this.solutions.length && this.solutions.length <= 20) {
-        console.log('~~ game:', this.getGameString());
+        var newGame = this.getGameString();
+        console.log('~~ game:', newGame);
         console.log('~~ count:', this.solutions.length);
+        this.genLevels.push({levelName: `solutions : ${this.solutions.length}`, gameString: newGame});
       }
     } while (counter++ < 100);
+    this.setGames.emit(this.genLevels);
   }
 }
