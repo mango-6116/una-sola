@@ -27,18 +27,26 @@ export class PlayBoardComponent implements OnInit {
   _gameString: string = '';
   @Input() set gameString(val: string) {
     if (!!val) {
-      if (val == 'solve') {
+      val = val.trimStart().trimEnd();
+      var command = val.toLowerCase();
+      if (command == 'solve') {
       // intialize brute force solver:
         this.startSolver();
-      }else if (val == 'gen') {
-        // intialize random gen:
+      }else if (command == 'gen') {
+        // intialize single random gen:
         this.genSample();
-      }else if (val.startsWith('cycle')) {
+      }else if (command.startsWith('cycle')) {
+        // intialize series of random gen games:
         this.cycleGen(val);
-      }else if (val == 'reset') {
+      }else if (command == 'reset') {
+        // back to installed levels
         this.setGames.emit([]);
+      }else if (command == 'hint') {
+        // step on solution
+        this.hint();
       } else {
         this._gameString = val;
+        this.newGame();
         this.setGameState(val);
       }
     }
@@ -57,6 +65,7 @@ export class PlayBoardComponent implements OnInit {
   pendingChecks = true;
   confettiSize = 32;
   genLevels: GameLevel[] = [];
+  currentStep = -1;
 
   constructor() {
   }
@@ -98,6 +107,11 @@ export class PlayBoardComponent implements OnInit {
     }
   }
 
+  newGame() {
+    this.solutions = [];
+    this.currentStep = -1;
+  }
+
   checkDrop(ev: any) {
     const mFrom = ev.previousContainer.element.nativeElement.id.split('-');
     const mTo = ev.container.element.nativeElement.id.split('-');
@@ -110,6 +124,7 @@ export class PlayBoardComponent implements OnInit {
   makeMove(from: moveStep, to: moveStep) {
     if (this.tryStep(from, to) == 1) {
       this.pop();
+      this.currentStep = -1;
     }
   }
 
@@ -222,6 +237,25 @@ export class PlayBoardComponent implements OnInit {
       console.log('~~:', this.solutions);
     }
     this.resetToMap(0);
+  }
+
+  hint() {
+    if (!this.solutions.length) {
+      this.startSolver();
+      if (this.solutions.length) {
+        this.currentStep = 0;
+      }
+    }
+    if (this.currentStep !== -1) {
+      const step = this.solutions[0][this.currentStep];
+      if (!!step) {
+        this.makeMove(
+          {row: step[0].row, col: step[0].col},
+          {row: step[1].row, col: step[1].col}
+        );
+        this.currentStep++;
+      }
+    }
   }
 
   addCheckPoints(pieces: boardPiece[], index: number | null) {
@@ -344,6 +378,7 @@ export class PlayBoardComponent implements OnInit {
         this.genLevels.push({levelName: `solutions : ${this.solutions.length}`, gameString: newGame});
       }
     } while (counter++ < 100);
+    this.gameString = this.genLevels[0]?.gameString;
     this.setGames.emit(this.genLevels);
   }
 }

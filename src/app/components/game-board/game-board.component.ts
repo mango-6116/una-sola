@@ -96,6 +96,9 @@ export class GameBoardComponent implements OnInit {
       { levelName: '018 - Easy', gameString: '.... .RPP ..P. ...P' },
       { levelName: '019 - Easy', gameString: '..B. .B.B B.B. .BR.' },
       { levelName: '020 - Easy', gameString: '...N P..P R... .B..' },
+      { levelName: '021 - Easy', gameString: '.... .RPP ..P. ...P' },
+      { levelName: '022 - Easy', gameString: '..B. .B.B B.B. .BR.' },
+      { levelName: '023 - Easy', gameString: '...Q .N.. ..N. Q...' },
       { levelName: '101 - Medium', gameString: '.NRN .... .B.P R...' },
       { levelName: '102 - Medium', gameString: '..P. BNRN ..P. ....' },
       { levelName: '103 - Medium', gameString: 'N..B K... .NB. P...' },
@@ -151,6 +154,51 @@ export class GameBoardComponent implements OnInit {
       { levelName: '153 - Medium', gameString: 'P... .B.. ...N RN.P' },
       { levelName: '154 - Medium', gameString: 'P... R.B. .R.. ...N' },
       { levelName: '155 - Medium', gameString: '.P.N Q... ..R. ..K.' },
+      { levelName: '156 - Medium', gameString: '.NP. .PN. P..B .P..' },
+      { levelName: '157 - Medium', gameString: 'RP.. .PN. N... B..P' },
+      { levelName: '158 - Medium', gameString: 'R... ..PP RP.N P...' },
+      { levelName: '159 - Medium', gameString: '.P.. R..R P... NB.N' },
+      { levelName: '160 - Medium', gameString: '..NP RP.. .N.. P.B.' },
+      { levelName: '161 - Medium', gameString: 'P... ...R .NPR ..PN' },
+      { levelName: '162 - Medium', gameString: '.RPP BBP. P... ....' },
+      { levelName: '163 - Medium', gameString: '.N.. BP.. .N.P .K.B' },
+      { levelName: '164 - Medium', gameString: '.NBK P... N.P. P...' },
+      { levelName: '165 - Medium', gameString: '..PB NR.. ..P. ..NP' },
+      { levelName: '166 - Medium', gameString: '.R.. ..N. P.PP ..BB' },
+      { levelName: '167 - Medium', gameString: '...P .PB. N.R. .P.N' },
+      { levelName: '168 - Medium', gameString: '..NN BP.. ..P. .BP.' },
+      { levelName: '169 - Medium', gameString: '.P.K ...P P.N. .P.R' },
+      { levelName: '170 - Medium', gameString: '.N.. .PB. ..P. PP.K' },
+      { levelName: '171 - Medium', gameString: 'P.B. BP.. RN.K ....' },
+      { levelName: '172 - Medium', gameString: '.PR. .B.N P... P.PB' },
+      { levelName: '173 - Medium', gameString: '..P. ..BP PP.. ..BN' },
+      { levelName: '174 - Medium', gameString: '.P.. .P.P ..N. PBR.' },
+      { levelName: '175 - Medium', gameString: '.N.B ..P. P... KN.P' },
+      { levelName: '176 - Medium', gameString: '..BP .N.N P..B ..P.' },
+      { levelName: '177 - Medium', gameString: '.N.. PP.. B... .RPB' },
+      { levelName: '178 - Medium', gameString: '.B.. .PB. .PN. P..N' },
+      { levelName: '179 - Medium', gameString: 'PR.. .B.. ..NB .P.P' },
+      { levelName: '180 - Medium', gameString: '.B.. .... N..B .NP.' },
+      { levelName: '181 - Medium', gameString: '.N.. .P.. PBN. ..P.' },
+      { levelName: '182 - Medium', gameString: 'PN.. ...N .PP. B...' },
+      { levelName: '183 - Medium', gameString: 'NP.. B.P. ...B P.N.' },
+      { levelName: '184 - Medium', gameString: '.... P.BN .PP. .P.B' },
+      { levelName: '185 - Medium', gameString: 'P... PBP. PN.. .N..' },
+      { levelName: '186 - Medium', gameString: 'P.PP ..B. .N.N ...B' },
+      { levelName: '187 - Medium', gameString: 'B... P.N. .NBP .P..' },
+      { levelName: '188 - Medium', gameString: 'P..N .BP. .RN. B...' },
+      { levelName: '189 - Medium', gameString: '.P.P NKR. ..B. P...' },
+      { levelName: '190 - Medium', gameString: '...P K..P NN.. B.P.' },
+      { levelName: '191 - Medium', gameString: '.N.B .P.. ..N. PP.B' },
+      { levelName: '192 - Medium', gameString: '.RN. ..B. P..R .B..' },
+      { levelName: '193 - Medium', gameString: 'P..B .RN. R..B ....' },
+      { levelName: '194 - Medium', gameString: '.... .PRP P.PP .P.B' },
+      { levelName: '195 - Medium', gameString: '.RR. P..P .... .NN.' },
+      { levelName: '196 - Medium', gameString: 'B.PN .K.. PP.B ....' },
+      { levelName: '197 - Medium', gameString: '..N. .N.. P.PK P.P.' },
+      { levelName: '198 - Medium', gameString: '...P NPRP ..B. NP..' },
+      { levelName: '199 - Medium', gameString: 'B... ...P .RNN PP..' },
+      { levelName: '200 - Medium', gameString: '.... .P.R P.PP .P.B' },
       { levelName: '201 - Hard', gameString: 'B.K. .N.. ..N. PP.B' },
       { levelName: '202 - Hard', gameString: '..P. ..RN ..NP B.B.' },
       { levelName: '203 - Hard', gameString: '...P RKQ. ..B. .RB.' },
@@ -204,6 +252,31 @@ export class GameBoardComponent implements OnInit {
       { levelName: '251 - Hard', gameString: 'P... .PRP ..K. RPB.' },
       { levelName: '252 - Hard', gameString: 'P..R .B.P .NN. P..P' },
       { levelName: '253 - Hard', gameString: 'B.P. ..N. BN.. ....' },
+      { levelName: '254 - Hard', gameString: '.P.. P..R ..NK B.N.' },
+      { levelName: '255 - Hard', gameString: '..B. P..P .PP. RNB.' },
+      { levelName: '256 - Hard', gameString: '...N .P.K .B.. P.BP' },
+      { levelName: '257 - Hard', gameString: '.P.. K... ..PB BN.P' },
+      { levelName: '258 - Hard', gameString: '...P .BP. .NPR ..P.' },
+      { levelName: '259 - Hard', gameString: '.P.. N..R B.P. NP.R' },
+      { levelName: '260 - Hard', gameString: '..N. RP.. K... .NPB' },
+      { levelName: '261 - Hard', gameString: 'B..P KN.. ..N. B.P.' },
+      { levelName: '262 - Hard', gameString: 'P..B ..PR .P.. PB..' },
+      { levelName: '263 - Hard', gameString: '.NP. K... .PPP .B..' },
+      { levelName: '264 - Hard', gameString: '.PNP .... B..Q ..P.' },
+      { levelName: '265 - Hard', gameString: '..B. N..B PPP. .P..' },
+      { levelName: '266 - Hard', gameString: '.... .P.B .PPP .NN.' },
+      { levelName: '267 - Hard', gameString: 'P..R .B.P .NN. P..P' },
+      { levelName: '268 - Hard', gameString: 'B.P. ..N. BN.. ....' },
+      { levelName: '269 - Hard', gameString: '.BP. PP.. NP.P P.PB' },
+      { levelName: '270 - Hard', gameString: '.PK. .B.R ...P .PN.' },
+      { levelName: '271 - Hard', gameString: '.P.. R.NP .N.. B..K' },
+      { levelName: '272 - Hard', gameString: 'KN.N ..P. P.B. ..P.' },
+      { levelName: '273 - Hard', gameString: '..B. .P.N .B.. NPP.' },
+      { levelName: '274 - Hard', gameString: '.N.. .BPP ..PP N...' },
+      { levelName: '275 - Hard', gameString: '..PB PP.. .R.. .P.N' },
+      { levelName: '276 - Hard', gameString: '.R.. .R.. N..P N.B.' },
+      { levelName: '277 - Hard', gameString: 'B..N NP.B B.PN N..B' },
+      { levelName: '278 - Hard', gameString: '...P BQ.. .BR. .P..' },
       { levelName: '301 - Expert', gameString: '.P.. .B.. ..NP BRKN' },
       { levelName: '302 - Expert', gameString: '.N.P P... BRB. N.R.' },
       { levelName: '303 - Expert', gameString: '.N.P K.B. B.N. R.P.' },
@@ -248,43 +321,9 @@ export class GameBoardComponent implements OnInit {
       { levelName: '342 - Expert', gameString: '.BNN .BPP .R.. R...' },
       { levelName: '343 - Expert', gameString: '.RP. BR.P NB.. N...' },
       { levelName: '344 - Expert', gameString: '.PN. .PN. B..B R..R' },
-      { levelName: '345 - Expert', gameString: '.NB. ..BP RR.P N...' }
+      { levelName: '345 - Expert', gameString: '.NB. ..BP RR.P N...' },
+      { levelName: '346 - Expert', gameString: '.P.. .B.. P.NP P.N.' },
+      { levelName: '347 - Expert', gameString: '.R.P ..P. BBN. .N..' }
     ];
   }
-  /*
-  M .NP..PN.P..B.P..
-  M RP...PN.N...B..P
-  M R.....PPRP.NP...
-  M .P..R..RP...NB.N
-  M ..NPRP...N..P.B.
-  M P......R.NPR..PN
-  M .RPPBBP.P.......
-  M .N..BP...N.P.K.B
-  M .NBKP...N.P.P...
-  M ..PBNR....P...NP
-  M .R....N.P.PP..BB
-  M ...P.PB.N.R..P.N
-  M ..NNBP....P..BP.
-  M .P.K...PP.N..P.R
-  M .N...PB...P.PP.K
-  M P.B.BP..RN.K....
-  M .PR..B.NP...P.PB
-  M ..P...BPPP....BN
-  M .P...P.P..N.PBR.
-  M .N.B..P.P...KN.P
-  M ..BP.N.NP..B..P.
-  M .N..PP..B....RPB
-  M .B...PB..PN.P..N
-
-  H .P..P..R..NKB.N.
-  H ..B.P..P.PP.RNB.
-  H ...N.P.K.B..P.BP
-  H .P..K.....PBBN.P
-  H ...P.BP..NPR..P.
-  H .P..N..RB.P.NP.R
-  H ..N.RP..K....NPB
-  X .P...B..P.NPP.N.
-  X .R.P..P.BBN..N..
-
-  */
 }
