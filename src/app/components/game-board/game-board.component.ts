@@ -17,6 +17,7 @@ export class GameBoardComponent implements OnInit {
   currentGameString: string = '';
   levels: GameLevel[] = [];
   options: any = {};
+  stepper = 0;
 
   ngOnInit() {
     this.setLevels();
@@ -37,6 +38,7 @@ export class GameBoardComponent implements OnInit {
 
   nextGameString(ev: any) {
     const refIndex = this.levels.findIndex(r => r.gameString === ev);
+    this.stepper = 0;
     if (refIndex !== -1) {
         this.currentGameString =
         refIndex === this.levels.length-1 ?
@@ -48,6 +50,7 @@ export class GameBoardComponent implements OnInit {
 
   previousGameString(ev: any) {
     const refIndex = this.levels.findIndex(r => r.gameString === ev);
+    this.stepper = 0;
     if (refIndex !== -1) {
         this.currentGameString =
         refIndex === 0 ?
@@ -59,6 +62,7 @@ export class GameBoardComponent implements OnInit {
 
   changeGame(ev: any) {
     this.currentGameString = ev.target.value;
+    this.stepper = 0;
     this.saveGame();
   }
 
@@ -72,6 +76,10 @@ export class GameBoardComponent implements OnInit {
     } else {
       this.setLevels();
     }
+  }
+
+  getHint() {
+    this.stepper++;
   }
 
   setLevels() {
@@ -96,8 +104,7 @@ export class GameBoardComponent implements OnInit {
       { levelName: '018 - Easy', gameString: '.... .RPP ..P. ...P' },
       { levelName: '019 - Easy', gameString: '..B. .B.B B.B. .BR.' },
       { levelName: '020 - Easy', gameString: '...N P..P R... .B..' },
-      { levelName: '021 - Easy', gameString: '.... .RPP ..P. ...P' },
-      { levelName: '022 - Easy', gameString: '...Q .N.. ..N. Q...' },
+      { levelName: '021 - Easy', gameString: '...Q .N.. ..N. Q...' },
       { levelName: '101 - Medium', gameString: '.NRN .... .B.P R...' },
       { levelName: '102 - Medium', gameString: '..P. BNRN ..P. ....' },
       { levelName: '103 - Medium', gameString: 'N..B K... .NB. P...' },
@@ -276,6 +283,7 @@ export class GameBoardComponent implements OnInit {
       { levelName: '276 - Hard', gameString: '.R.. .R.. N..P N.B.' },
       { levelName: '277 - Hard', gameString: 'B..N NP.B B.PN N..B' },
       { levelName: '278 - Hard', gameString: '...P BQ.. .BR. .P..' },
+      { levelName: '279 - Hard', gameString: 'P..B ..PB .P.. PR..' },
       { levelName: '301 - Expert', gameString: '.P.. .B.. ..NP BRKN' },
       { levelName: '302 - Expert', gameString: '.N.P P... BRB. N.R.' },
       { levelName: '303 - Expert', gameString: '.N.P K.B. B.N. R.P.' },

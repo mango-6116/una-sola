@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import * as CT from 'js-combinatorics';
 import Sample from '@stdlib/random-sample';
 import  JSConfetti  from 'js-confetti';
@@ -41,9 +41,6 @@ export class PlayBoardComponent implements OnInit {
       }else if (command == 'reset') {
         // back to installed levels
         this.setGames.emit([]);
-      }else if (command == 'hint') {
-        // step on solution
-        this.hint();
       } else {
         this._gameString = val;
         this.newGame();
@@ -56,6 +53,13 @@ export class PlayBoardComponent implements OnInit {
     return this._gameString;
   }
 
+  @Input() set doHint(val: number) {
+    if (!this.solving && val > 0) {
+      // step on solution
+      this.hint();
+    }
+  }
+
   @Output() setGames = new EventEmitter<GameLevel[]>();
 
   boardMaps: boardPiece[][] = [];
@@ -66,7 +70,9 @@ export class PlayBoardComponent implements OnInit {
   confettiSize = 32;
   genLevels: GameLevel[] = [];
   currentStep = -1;
-
+  highPiece = -1;
+  solving = false;
+  
   constructor() {
   }
 
@@ -241,7 +247,9 @@ export class PlayBoardComponent implements OnInit {
 
   hint() {
     if (!this.solutions.length) {
+      this.solving = true;
       this.startSolver();
+      this.solving = false;
       if (this.solutions.length) {
         this.currentStep = 0;
       }
@@ -249,11 +257,19 @@ export class PlayBoardComponent implements OnInit {
     if (this.currentStep !== -1) {
       const step = this.solutions[0][this.currentStep];
       if (!!step) {
-        this.makeMove(
-          {row: step[0].row, col: step[0].col},
-          {row: step[1].row, col: step[1].col}
-        );
-        this.currentStep++;
+        this.highPiece = step[0].row * 10 + step[0].col;
+        setTimeout(() => {
+          this.makeMove(
+            {row: step[0].row, col: step[0].col},
+            {row: step[1].row, col: step[1].col}
+          );
+          this.highPiece = step[1].row * 10 + step[1].col;
+          this.currentStep++;
+          setTimeout(() => {
+            this.highPiece = -1;
+          }, 500);            
+        }, 500);
+
       }
     }
   }

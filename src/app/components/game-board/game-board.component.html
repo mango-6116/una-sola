@@ -3,7 +3,8 @@
     <div class="play-board">
         <app-play-board 
           [gameString]="currentGameString"
-          (setGames)="setGames($event)">
+          (setGames)="setGames($event)"
+          [doHint]="stepper">
         </app-play-board>
     </div>
     <div class="controls">
@@ -29,6 +30,9 @@
             </select>
             <button mat-flat-button aria-label="Next" color="accent" (click)="nextGameString(gamestring.value)">
               <mat-icon>chevron_right</mat-icon>
+            </button>
+            <button class="hint" mat-flat-button aria-label="Hint" color="accent" (click)="getHint()">
+              <mat-icon>sos</mat-icon>
             </button>
           </div>
         </div>

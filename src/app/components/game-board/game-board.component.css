@@ -10,6 +10,10 @@
         "a-play-board a-reference";
 }
 
+.hint {
+    margin-left: 0.4em;
+}
+
 .play-board {
     grid-area: a-play-board;
     background-color: white;

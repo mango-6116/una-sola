@@ -8,6 +8,15 @@
   height: 88vh;
 }
 
+.pf ::ng-deep svg path, .pf ::ng-deep svg g{
+  fill: #73f923 !important;
+}
+/* 
+ ::ng-deep svg path, ::ng-deep svg g {
+  foll: yellow !important;
+} */
+
+
 .cell-row {
   display: flex;
   height: 25%
