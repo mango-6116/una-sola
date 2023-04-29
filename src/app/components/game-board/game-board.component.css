@@ -4,14 +4,10 @@
     box-sizing: content-box;
     display: grid;
     grid-template-columns: 100vh auto;
-    grid-template-rows: 28vh auto;
+    grid-template-rows: 40vh auto;
     grid-template-areas: 
         "a-play-board a-controls"
         "a-play-board a-reference";
-}
-
-.hint {
-    margin-left: 0.4em;
 }
 
 .play-board {
@@ -35,7 +31,7 @@
     margin: 0 1.5em 1.5em 0;
     padding: 2.5em;
     font-size: 1.1vmax;
-    max-height: 68vh;
+    max-height: 56vh;
     overflow-y: scroll;
 }
 
@@ -45,6 +41,12 @@
     padding: .6em;
     margin: .3em;
     font-size: 1.5vmax;
+}
+
+.game-string-row.hint {
+    flex-direction: row-reverse;
+    margin-top: 0;
+    margin-right: 1.5em;
 }
 
 .game-string {
@@ -83,7 +85,7 @@
 
     .reference {
         margin: 1.5em;
-        max-height: calc(96vh - 100vw - 8em);
+        max-height: calc(96vh - 100vw - 12em);
         font-size: .8vmax;
     }
 

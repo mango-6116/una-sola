@@ -31,12 +31,14 @@
             <button mat-flat-button aria-label="Next" color="accent" (click)="nextGameString(gamestring.value)">
               <mat-icon>chevron_right</mat-icon>
             </button>
-            <button class="hint" mat-flat-button aria-label="Hint" color="accent" (click)="getHint()">
-              <mat-icon>sos</mat-icon>
-            </button>
           </div>
         </div>
-    </div>
+        <div  class="game-string-row hint">
+          <button mat-flat-button aria-label="Hint" color="accent" (click)="getHint()">
+            <mat-icon>sos</mat-icon>
+          </button>
+        </div>
+    </div>  
     <div class="reference">
       <h3>Puzzle Rules</h3>
       <span> - Single player puzzle game.</span><br/>
