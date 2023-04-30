@@ -11,10 +11,16 @@ export class AppComponent {
   name = 'Angular ' + VERSION.major;
 
   constructor(swUpdate: SwUpdate) {
-    swUpdate.versionUpdates
+    if (swUpdate.isEnabled){
+      swUpdate.versionUpdates
       .pipe(filter((evt): evt is VersionReadyEvent => evt.type === 'VERSION_READY'))
       .subscribe(evt => {
-          document.location.reload();
+        swUpdate.activateUpdate().then(result => {
+          if (result) {
+            document.location.reload();
+          }
+        });
       });
+    }
   }
 }

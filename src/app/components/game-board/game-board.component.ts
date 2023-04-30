@@ -284,6 +284,7 @@ export class GameBoardComponent implements OnInit {
       { levelName: '277 - Hard', gameString: 'B..N NP.B B.PN N..B' },
       { levelName: '278 - Hard', gameString: '...P BQ.. .BR. .P..' },
       { levelName: '279 - Hard', gameString: 'P..B ..PB .P.. PR..' },
+      { levelName: '280 - Hard', gameString: '.K.. B.PN .... B.PN' },
       { levelName: '301 - Expert', gameString: '.P.. .B.. ..NP BRKN' },
       { levelName: '302 - Expert', gameString: '.N.P P... BRB. N.R.' },
       { levelName: '303 - Expert', gameString: '.N.P K.B. B.N. R.P.' },
