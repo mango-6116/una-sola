@@ -23,7 +23,16 @@ export interface boardPiece {
 })
 export class PlayBoardComponent implements OnInit {
 
-  gameState: string[][] = [];
+  // Originally this input was for the game string from the outter board
+  // It is still used for that on normal play, but some 'hacks' were added for dev:
+  // solve : run brute force solver and show results in console
+  // gen : generate random level (may or may not have solution)
+  // cycle : generate bunch of solvable levels (some options apply, see method)
+  //         i.e. cycle:4:PPPPRRNN => levels will have 4 pieces on the board with up to 
+  //         4 pawns, 2 rooks and 2 knights.
+  //         levels are added to the game dropdown but will be lost on re-load
+  //         write them down if you like them! :)
+  // reset : restore game dropdown to installed levels after random generation. 
   _gameString: string = '';
   @Input() set gameString(val: string) {
     if (!!val) {
@@ -53,6 +62,7 @@ export class PlayBoardComponent implements OnInit {
     return this._gameString;
   }
 
+  // input to get signal for move suggestion
   @Input() set doHint(val: number) {
     if (!this.solving && val > 0) {
       // step on solution
@@ -60,27 +70,32 @@ export class PlayBoardComponent implements OnInit {
     }
   }
 
+  // notify outer board when the game dropdown list changed (by cycle or reset)
   @Output() setGames = new EventEmitter<GameLevel[]>();
 
-  boardMaps: boardPiece[][] = [];
-  mapId = 0;
-  moveTracker: any[] = [];
-  solutions: any[] = [];
-  pendingChecks = true;
+  gameState: string[][] = []; // game state as an array of rows/columns
+
+  boardMaps: boardPiece[][] = []; // used by solver 
+  mapId = 0; // used by solver 
+  moveTracker: any[] = []; // used by hint
+  solutions: any[] = []; // used by solver 
+  pendingChecks = true; // used by solver 
   confettiSize = 32;
-  genLevels: GameLevel[] = [];
-  currentStep = -1;
-  highPiece = -1;
-  solving = false;
+  genLevels: GameLevel[] = []; // used by cycle (generated levels) 
+  currentStep = -1; // used by hint 
+  highlightCell = -1; // used by hint  (cell to highlight = 10*row + col)
+  solving = false; // used by hint 
   
   constructor() {
   }
 
   ngOnInit() {
+    // set up confetti for wins (only once)
     if (!window['js-confetti']) {
 
       const setConfettiSize = (isPortrait: boolean) => this.confettiSize = isPortrait ? 64 : 32;
 
+      // Change confetti size on portrait/landscape ...
       // Create the query list.
       const mediaQueryList = window.matchMedia("(orientation: portrait)");
       setConfettiSize(mediaQueryList.matches);
@@ -93,6 +108,7 @@ export class PlayBoardComponent implements OnInit {
       // Add the callback function as a listener to the query list.
       mediaQueryList.addEventListener("change", handleOrientationChange);
 
+      // set up target canvas
       const canvas = document.getElementById('party') as HTMLCanvasElement;
       window['js-confetti'] = new JSConfetti({canvas});
     }
@@ -101,15 +117,13 @@ export class PlayBoardComponent implements OnInit {
   // Play code...
   ///////////////////////////////////
 
+  // fill up game state from game string
   setGameState(val: string) {
     this.gameState = []
     var gameString = val.split(' ').join('');
     for (let r = 0; r <= 3; r++) {
       const rowString = gameString.substr(r*4, 4);
-      this.gameState[r] = [];
-      for (let c = 0; c <= 3; c++) {
-        this.gameState[r][c] = rowString.charAt(c);
-      }
+      this.gameState[r] = rowString.split('');
     }
   }
 
@@ -118,9 +132,12 @@ export class PlayBoardComponent implements OnInit {
     this.currentStep = -1;
   }
 
+  // event handler for drop of a piece..
   checkDrop(ev: any) {
+    // identify source and target of move
     const mFrom = ev.previousContainer.element.nativeElement.id.split('-');
     const mTo = ev.container.element.nativeElement.id.split('-');
+    // try the move
     this.makeMove(
       {row: +mFrom[1], col: +mFrom[2]}, 
       {row: +mTo[1], col: +mTo[2]}
@@ -128,12 +145,15 @@ export class PlayBoardComponent implements OnInit {
   }
 
   makeMove(from: moveStep, to: moveStep) {
+    // if only one piece is left after trying the move... party time!
     if (this.tryStep(from, to) == 1) {
       this.pop();
       this.currentStep = -1;
     }
   }
 
+  // try the move and set the ending state of the game if move is valid...
+  // return number of pieces left on the board
   tryStep(from: moveStep, to: moveStep) {
     const pieceMoved = this.gameState[from.row][from.col];
     const pieceTaken = this.gameState[to.row][to.col];
@@ -152,6 +172,7 @@ export class PlayBoardComponent implements OnInit {
     return piecesLeft;
   }
 
+  // check if the move is valid based on piece type and from/to cells on the board
   isValidMove(pieceMoved: string, from: moveStep, pieceTaken: string, to: moveStep) {
     // Make sure we are capturing a piece and not a moving into empty spot
     let validMove = pieceTaken !== '.';
@@ -216,6 +237,7 @@ export class PlayBoardComponent implements OnInit {
     return pathClear;
   }
 
+  // show confetti
   pop () {
     //emojis: ['🌈', '⚡️', '💥', '✨', '💫', '🌸', '💰', '💎', '💵',],
     //emojis: ['♔', '♕', '♖', '♗', '♘', '♙'],
@@ -226,7 +248,12 @@ export class PlayBoardComponent implements OnInit {
       confettiNumber: 64
    })
   }
+// end of normal play code
+///////////////////////////////////
 
+
+/// All code below is additional features
+// not needed if we don't use 'gen', 'cycle', 'solve' and we remove 'hint' (sos button)
 // Solve code... (brute force)
 ///////////////////////////////////
   startSolver(skipLog = false) {
@@ -245,6 +272,9 @@ export class PlayBoardComponent implements OnInit {
     this.resetToMap(0);
   }
 
+  // run solver if need be and use first solution 
+  // find next step
+  // highlight piece at cell from, make move and highlight piece at target cell, remove highlight
   hint() {
     if (!this.solutions.length) {
       this.solving = true;
@@ -257,16 +287,16 @@ export class PlayBoardComponent implements OnInit {
     if (this.currentStep !== -1) {
       const step = this.solutions[0][this.currentStep];
       if (!!step) {
-        this.highPiece = step[0].row * 10 + step[0].col;
+        this.highlightCell = step[0].row * 10 + step[0].col;
         setTimeout(() => {
           this.makeMove(
             {row: step[0].row, col: step[0].col},
             {row: step[1].row, col: step[1].col}
           );
-          this.highPiece = step[1].row * 10 + step[1].col;
+          this.highlightCell = step[1].row * 10 + step[1].col;
           this.currentStep++;
           setTimeout(() => {
-            this.highPiece = -1;
+            this.highlightCell = -1;
           }, 500);            
         }, 500);
 
@@ -274,6 +304,7 @@ export class PlayBoardComponent implements OnInit {
     }
   }
 
+  // part of solver
   addCheckPoints(pieces: boardPiece[], index: number | null) {
     this.boardMaps.push(pieces);
     var mapId = this.boardMaps.length -1;
@@ -281,6 +312,7 @@ export class PlayBoardComponent implements OnInit {
       .map(element => ({...element, result: null, mapId: mapId, prevIndex: index})));
   }
 
+  // part of solver
   crunch(pieces: boardPiece[], index: number | null) {
     this.addCheckPoints(pieces, index);
     do {
@@ -308,6 +340,7 @@ export class PlayBoardComponent implements OnInit {
     
   }
 
+  // game state as needed by solver (array of pieces not array of cells)
   boardPieces() {
     var result: boardPiece[] = [];
     for (let r = 0; r <= 3; r++) {
@@ -320,6 +353,7 @@ export class PlayBoardComponent implements OnInit {
     return result;
   }
 
+  // set board at different intermediate steps for solver
   resetToMap(index: number) {
     this.setGameState('.... .... .... ....');
     this.boardMaps[index].forEach(chip => 
@@ -327,11 +361,14 @@ export class PlayBoardComponent implements OnInit {
     );
   }
 
+  // call combinatoric lib to get all permutations of piece pairs to try while solving
   findMoves(boardPieces: boardPiece[]) {
     var it =  new CT.Permutation(boardPieces, 2);
     return it.toArray();
   }
 
+  // after all permutations of pieces were tried, find paths that resulted 
+  // in only one piece left
   findSolutions() {
     this.solutions = this.moveTracker
     .filter(move => move.result === 1)
@@ -344,6 +381,12 @@ export class PlayBoardComponent implements OnInit {
     })
   }
 
+  // generate a random 'level'... throw random pieces onto random cells
+  // by default, 7 pieces out of RKBBNNPPP
+  // use spec to override that... 
+  // i.e.: cycle:3:KQPPP => generate levels with only 3 pieces out 
+  //       of 1 king, 1 queen and 3 pawns
+  // level may have no solution... use solver to find out.
   genSample(skipLog = false, spec = '') {
     this.setGameState('.... .... .... ....');
     var allPieces = ['R', 'K', 'B', 'B', 'N', 'N', 'P', 'P', 'P', 'P'];
@@ -375,12 +418,16 @@ export class PlayBoardComponent implements OnInit {
     }
   }
 
+  // get game string from pieces map
   getGameString() {
     var result = '';
     this.gameState.map(row => row.map(cell => result += cell));
     return result;
   }
 
+  // cycle to generate random solvable levels
+  // emit the list of levels found to outter board to place it in the dropdown.
+  // levels with more than 20 solutions are not considered (they tend to be way too easy)
   cycleGen(spec: string) {
     this.genLevels = [];
     var counter = 0;

@@ -1,7 +1,7 @@
   <div class="cell-grid" cdkDropListGroup>
     <div class="cell-row" *ngFor="let row of gameState; let rowIndex = index">
       <div class="cell" [ngClass]="{'shaded': ((rowIndex + colIndex)%2 === 1)}" *ngFor="let cell of row; let colIndex = index"  (cdkDropListDropped)="checkDrop($event)" cdkDropList [id]="'ci-' + rowIndex + '-' + colIndex">
-        <div [ngSwitch]="cell" [ngClass]="{'pf': ((10 * rowIndex + colIndex) === highPiece)}"  cdkDragBoundary=".cell-grid" cdkDrag >
+        <div [ngSwitch]="cell" [ngClass]="{'pf': ((10 * rowIndex + colIndex) === highlightCell)}"  cdkDragBoundary=".cell-grid" cdkDrag >
           <div *cdkDragPlaceholder></div>
           <app-king *ngSwitchCase="'K'"></app-king>
           <app-queen *ngSwitchCase="'Q'"></app-queen>
