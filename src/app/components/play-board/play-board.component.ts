@@ -239,9 +239,9 @@ export class PlayBoardComponent implements OnInit {
 
   // show confetti
   pop () {
+    //emojis: ['⚡️', '💥', '🌈'],
     //emojis: ['🌈', '⚡️', '💥', '✨', '💫', '🌸', '💰', '💎', '💵',],
     //emojis: ['♔', '♕', '♖', '♗', '♘', '♙'],
-    //emojis: ['⚡️', '💥', '🌈'],
     window['js-confetti'].addConfetti({
       emojis:['🔴', '🟠', '🟡', '🟢', '🔵', '🟣', '⚪', '🟥', '🟧', '🟨', '🟩', '🟦', '🟪', '🟫'],
       emojiSize: this.confettiSize,
@@ -353,18 +353,18 @@ export class PlayBoardComponent implements OnInit {
     return result;
   }
 
+  // call combinatoric lib to get all permutations of piece pairs to try while solving
+  findMoves(boardPieces: boardPiece[]) {
+    var it =  new CT.Permutation(boardPieces, 2);
+    return it.toArray();
+  }
+
   // set board at different intermediate steps for solver
   resetToMap(index: number) {
     this.setGameState('.... .... .... ....');
     this.boardMaps[index].forEach(chip => 
       this.gameState[chip.row][chip.col] = chip.piece
     );
-  }
-
-  // call combinatoric lib to get all permutations of piece pairs to try while solving
-  findMoves(boardPieces: boardPiece[]) {
-    var it =  new CT.Permutation(boardPieces, 2);
-    return it.toArray();
   }
 
   // after all permutations of pieces were tried, find paths that resulted 
