@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1682883989623,
+  "timestamp": 1683168493285,
   "index": "/una-sola/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "/una-sola/favicon.ico",
         "/una-sola/index.html",
-        "/una-sola/main.87d40490674e59ae.js",
+        "/una-sola/main.adbfd0a96dc029de.js",
         "/una-sola/manifest.webmanifest",
         "/una-sola/polyfills.add2a644d95f31b5.js",
         "/una-sola/runtime.70ea249d9de51d31.js",
@@ -56,9 +56,9 @@
     "/una-sola/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
     "/una-sola/assets/knight.svg": "e3fd452766e4671b79a54dcc564fe610cad38500",
     "/una-sola/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/una-sola/index.html": "3dc3bf7dfb45fd788b7ffc7ea3c39f51dc7d0181",
-    "/una-sola/main.87d40490674e59ae.js": "f982c8df8dcac0ce1fba3f9ee1bd63a52b68f94f",
-    "/una-sola/manifest.webmanifest": "2824898adcc152a889c693edef3d298d80c165be",
+    "/una-sola/index.html": "6737514731725e3ddb7b2e85f4caced27dd5733b",
+    "/una-sola/main.adbfd0a96dc029de.js": "f9fcde9528791236b37fd488faa9b690885d5259",
+    "/una-sola/manifest.webmanifest": "9b4e60167ae3bf0b3d948f8cea9f9d9326aad99c",
     "/una-sola/polyfills.add2a644d95f31b5.js": "1f6eda8880ab6fade92f720c5cb71b103e2af975",
     "/una-sola/runtime.70ea249d9de51d31.js": "88e655af5b56cc6797fbd160f7aa5c7fd63e0a1b",
     "/una-sola/styles.760a20a942950953.css": "30047de275d74588b1f78a6953fd8461f80af7ec"
