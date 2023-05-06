@@ -21,11 +21,20 @@ export class GameBoardComponent implements OnInit {
 
   ngOnInit() {
     this.setLevels();
+    //this.findDupes();
     const lastGameString = localStorage.getItem('lastGameString');
     this.currentGameString = 
       !!lastGameString ?
       lastGameString :
       this.levels[0].gameString;
+  }
+
+  findDupes() {
+    const duplicateLevels =  [...new Set(this.levels.filter(
+      (level, idx, allLevels) => 
+        allLevels.findIndex(l => l.gameString === level.gameString) !== idx)
+      )];
+    console.log('~~~', duplicateLevels);
   }
 
   resetGameString(ev: any) {
@@ -272,7 +281,7 @@ export class GameBoardComponent implements OnInit {
       { levelName: '265 - Hard', gameString: '..B. N..B PPP. .P..' },
       { levelName: '266 - Hard', gameString: '.... .P.B .PPP .NN.' },
       { levelName: '267 - Hard', gameString: '.K.. B.PN .... B.PN' },
-      { levelName: '268 - Hard', gameString: 'B.P. ..N. BN.. ....' },
+      { levelName: '268 - Hard', gameString: '.N.. PB.N B... ....' },
       { levelName: '269 - Hard', gameString: '.BP. PP.. NP.P P.PB' },
       { levelName: '270 - Hard', gameString: '.PK. .B.R ...P .PN.' },
       { levelName: '271 - Hard', gameString: '.P.. R.NP .N.. B..K' },
@@ -351,7 +360,8 @@ export class GameBoardComponent implements OnInit {
       { levelName: '1015 - New-Set', gameString: '..N. BN.. P..K PP..' },
       { levelName: '1016 - New-Set', gameString: '.N.P PBP. ..R. .B..' },
       { levelName: '1017 - New-Set', gameString: '...N P.B. P.P. .R.B' },
-      { levelName: '1018 - New-Set', gameString: '.BK. N... ..N. .B.P' }
+      { levelName: '1018 - New-Set', gameString: '.BK. N... ..N. .B.P' },
+      { levelName: '1019 - New-Set', gameString: '...B .N.. .BN. ...P' }
     ];
   }
 }
