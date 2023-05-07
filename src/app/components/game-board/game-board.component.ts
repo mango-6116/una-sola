@@ -361,7 +361,14 @@ export class GameBoardComponent implements OnInit {
       { levelName: '1016 - New-Set', gameString: '.N.P PBP. ..R. .B..' },
       { levelName: '1017 - New-Set', gameString: '...N P.B. P.P. .R.B' },
       { levelName: '1018 - New-Set', gameString: '.BK. N... ..N. .B.P' },
-      { levelName: '1019 - New-Set', gameString: '...B .N.. .BN. ...P' }
+      { levelName: '1019 - New-Set', gameString: '...B .N.. .BN. ...P' },
+      { levelName: '1020 - New-Set', gameString: '..P. PP.. PR.. ..NB' },
+      { levelName: '1021 - New-Set', gameString: 'NB.. RR.. ..PN ..P.' },
+      { levelName: '1022 - New-Set', gameString: '..R. N... ..PP BNR.' },
+      { levelName: '1023 - New-Set', gameString: 'N.B. ...P PP.. B..R' },
+      { levelName: '1024 - New-Set', gameString: '.PBN RP.B .... ..P.' },
+      { levelName: '1025 - New-Set', gameString: 'PP.. P... .RNB ...N' },
+      { levelName: '1026 - New-Set', gameString: 'P..B ..PP .BP. ..N.' }
     ];
   }
 }
