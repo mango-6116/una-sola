@@ -21,7 +21,7 @@ export class GameBoardComponent implements OnInit {
 
   ngOnInit() {
     this.setLevels();
-    //this.findDupes();
+    // this.findDupes();
     const lastGameString = localStorage.getItem('lastGameString');
     this.currentGameString = 
       !!lastGameString ?
@@ -368,7 +368,44 @@ export class GameBoardComponent implements OnInit {
       { levelName: '1023 - New-Set', gameString: 'N.B. ...P PP.. B..R' },
       { levelName: '1024 - New-Set', gameString: '.PBN RP.B .... ..P.' },
       { levelName: '1025 - New-Set', gameString: 'PP.. P... .RNB ...N' },
-      { levelName: '1026 - New-Set', gameString: 'P..B ..PP .BP. ..N.' }
+      { levelName: '1026 - New-Set', gameString: 'P..B ..PP .BP. ..N.' },
+      { levelName: '1027 - New-Set', gameString: '..NP R... .B.. .NB.' },
+      { levelName: '1028 - New-Set', gameString: 'BB.. NP.N .... ..R.' },
+      { levelName: '1029 - New-Set', gameString: '...P .NP. N..P .B..' },
+      { levelName: '1030 - New-Set', gameString: '.N.. P.PB P... .N..' },
+      { levelName: '1031 - New-Set', gameString: '.PN. B.N. P... .P..' },
+      { levelName: '1032 - New-Set', gameString: '..P. NB.. ...N P.P.' },
+      { levelName: '1033 - New-Set', gameString: 'P.PK ...P ..N. NB..' },
+      { levelName: '1034 - New-Set', gameString: 'P.B. .NPN ...R .K..' },
+      { levelName: '1035 - New-Set', gameString: 'N... .... .P.. P.BB' },
+      { levelName: '1036 - New-Set', gameString: 'RP.. .... .B.P N.B.' },
+      { levelName: '1037 - New-Set', gameString: 'PN.. ..KP .BNP ....' },
+      { levelName: '1038 - New-Set', gameString: '..RP P... .NN. ..BB' },
+      { levelName: '1039 - New-Set', gameString: 'K... ..PP NP.. R.B.' },
+      { levelName: '1040 - New-Set', gameString: '.P.N P.BP ..BN ....' },
+      { levelName: '1041 - New-Set', gameString: 'PP.. B... ..NP .BK.' },
+      { levelName: '1042 - New-Set', gameString: '.P.. KN.. ...P PNB.' },
+      { levelName: '1043 - New-Set', gameString: 'P... NNPB ..R. .P..' },
+      { levelName: '1044 - New-Set', gameString: 'B... PNN. PB.. P...' },
+      { levelName: '1045 - New-Set', gameString: '.... PNB. .P.. P.P.' },
+      { levelName: '1046 - New-Set', gameString: '.N.. ...P .BB. PN..' },
+      { levelName: '1047 - New-Set', gameString: 'P.B. ..NB ..P. ..N.' },
+      { levelName: '1048 - New-Set', gameString: '.... .NP. .PB. P.BP' },
+      { levelName: '1049 - New-Set', gameString: 'N... .BBP .P.P ..P.' },
+      { levelName: '1050 - New-Set', gameString: '..PB .B.P .PN. ..P.' },
+      { levelName: '1051 - New-Set', gameString: 'BN.P .... .R.P N.P.' },
+      { levelName: '1052 - New-Set', gameString: 'R.P. .B.. .K.P N..P' },
+      { levelName: '1053 - New-Set', gameString: '.N.. P.PR ...P BP..' },
+      { levelName: '1054 - New-Set', gameString: 'P..P .NPB ..N. ...P' },
+      { levelName: '1055 - New-Set', gameString: 'PKP. ...N ..P. .BN.' },
+      { levelName: '1056 - New-Set', gameString: 'P..P N.N. .KP. ..B.' },
+      { levelName: '1057 - New-Set', gameString: '.P.. PR.. N.BN ..P.' },
+      { levelName: '1058 - New-Set', gameString: 'B..P P.N. .NB. .K..' },
+      { levelName: '1059 - New-Set', gameString: 'NP.. ..K. ..PP N..P' },
+      { levelName: '1060 - New-Set', gameString: 'K.N. ...N B.RP .P..' },
+      { levelName: '1061 - New-Set', gameString: 'BR.B .N.P ...P .P..' },
+      { levelName: '1062 - New-Set', gameString: '...R PRN. B.P. ..N.' },
+      { levelName: '1063 - New-Set', gameString: '...N ...N BPPR ...P' }
     ];
   }
 }
