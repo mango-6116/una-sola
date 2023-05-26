@@ -23,6 +23,8 @@ export interface boardPiece {
 })
 export class PlayBoardComponent implements OnInit {
 
+  nuke: GameLevel = {levelName: 'nuke', gameString: ''};
+
   // Originally this input was for the game string from the outter board
   // It is still used for that on normal play, but some 'hacks' were added for dev:
   // solve : run brute force solver and show results in console
@@ -50,6 +52,9 @@ export class PlayBoardComponent implements OnInit {
       }else if (command == 'reset') {
         // back to installed levels
         this.setGames.emit([]);
+      }else if (command == 'nuke') {
+        // back to installed levels, clear dev levels
+        this.setGames.emit([this.nuke]);
       } else {
         this._gameString = val;
         this.newGame();

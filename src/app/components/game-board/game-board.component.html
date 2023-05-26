@@ -16,7 +16,12 @@
               <mat-icon>cached</mat-icon>
             </button>
           </div>
-        </div>
+          <div *ngIf="inCycle" class="keep" >
+            <button  mat-flat-button aria-label="Keep" color="accent" (click)="keepDevLevel()">
+              <mat-icon>bookmark</mat-icon>
+            </button>
+          </div>  
+      </div>
         <div  class="game-string-row">
           <span>Games:</span>
           <div class="games-set">
@@ -39,7 +44,7 @@
           </button>
         </div>
     </div>  
-    <div class="reference">
+    <div class="reference" *ngIf="!inCycle">
       <h3>Puzzle Rules</h3>
       <span> - Single player puzzle game.</span><br/>
       <span> - The goal of peg solitaire with the moves of chess.</span><br/>
@@ -57,5 +62,7 @@
       <span> - The 'Reload' button resets the current game. (selected or custom entry)</span><br/>
       <span> - The last game layout will be 'remebered' locally by the browser.</span><br/>
     </div>
-
+    <div class="reference" *ngIf="inCycle">
+      <pre>{{devLevels}}</pre>
+    </div>
 </div>

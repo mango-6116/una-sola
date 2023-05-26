@@ -18,6 +18,8 @@ export class GameBoardComponent implements OnInit {
   levels: GameLevel[] = [];
   options: any = {};
   stepper = 0;
+  inCycle = false;
+  devLevels = '';
 
   ngOnInit() {
     this.setLevels();
@@ -79,12 +81,39 @@ export class GameBoardComponent implements OnInit {
     localStorage.setItem('lastGameString', this.currentGameString);
   }
 
+  saveDevLevels() {
+    localStorage.setItem('devLevels', this.devLevels);
+  }
+
+  getDevLevels() {
+    this.devLevels = localStorage.getItem('devLevels') ?? '';
+  }
+
+  clearDevLevels() {
+    this.devLevels = '';
+    this.saveDevLevels();
+  }
+
+  keepDevLevel() {
+    this.devLevels += `${this.currentGameString}\r\n`;
+    this.saveDevLevels();
+  }
+
   setGames(ev: GameLevel[]) {
-    if (ev.length) {
+    if (ev.length && ev[0].levelName!='nuke') {
       this.levels = ev;
+      this.inCycle = true;
+      this.getDevLevels();
     } else {
+      if (ev.length) {
+        this.clearDevLevels();
+      }
       this.setLevels();
+      this.inCycle = false;
     }
+    const gameString = this.levels[0].gameString;
+    this.nextGameString(gameString);
+    this.resetGameString(gameString);
   }
 
   getHint() {
@@ -405,7 +434,25 @@ export class GameBoardComponent implements OnInit {
       { levelName: '1060 - New-Set', gameString: 'K.N. ...N B.RP .P..' },
       { levelName: '1061 - New-Set', gameString: 'BR.B .N.P ...P .P..' },
       { levelName: '1062 - New-Set', gameString: '...R PRN. B.P. ..N.' },
-      { levelName: '1063 - New-Set', gameString: '...N ...N BPPR ...P' }
+      { levelName: '1063 - New-Set', gameString: '...N ...N BPPR ...P' },
+      { levelName: '1064 - New-Set', gameString: 'N..P .RB. N.B. .P..' },
+      { levelName: '1065 - New-Set', gameString: 'PNR. .P.B .K.. .P..' },
+      { levelName: '1066 - New-Set', gameString: '..BN PP.. P..R ..K.' },
+      { levelName: '1067 - New-Set', gameString: '...K .... BP.. NPRP' },
+      { levelName: '1068 - New-Set', gameString: 'P.NR ..PB ...B .P..' },
+      { levelName: '1069 - New-Set', gameString: '.P.. BK.N ...N P.P.' },
+      { levelName: '1070 - New-Set', gameString: 'BKP. ...B P.N. ...P' },
+      { levelName: '1071 - New-Set', gameString: '..BN .R.P P... PP..' },
+      { levelName: '1072 - New-Set', gameString: 'RN.. P.P. .N.B .P..' },
+      { levelName: '1073 - New-Set', gameString: '.N.. PP.P ..B. ..NP' },
+      { levelName: '1074 - New-Set', gameString: 'PR.. .K.. .PB. .BN.' },
+      { levelName: '1075 - New-Set', gameString: 'BR.. KP.. .... .NBP' },
+      { levelName: '1076 - New-Set', gameString: '.PN. .P.. B..R .BN.' },
+      { levelName: '1077 - New-Set', gameString: '.B.R B..P ...K .PN.' },
+      { levelName: '1078 - New-Set', gameString: '.N.. BPP. ..N. P..B' },
+      { levelName: '1079 - New-Set', gameString: 'K..R ..PN .N.. BP..' },
+      { levelName: '1080 - New-Set', gameString: '..N. .PP. ...P NK.P' },
+      { levelName: '1081 - New-Set', gameString: 'PN.. N..P .KB. ...P' }
     ];
   }
 }
